@@ -5,9 +5,13 @@ const transferService = require('../service/transferService');
 
 router.post('/', (req, res) => {
   const { from, to, amount } = req.body;
-  const result = transferService.transfer(from, to, amount);
-  if (result.error) return res.status(400).json({ error: result.error });
-  res.status(201).json(result.transfer);
+  try {
+    const result = transferService.transfer(from, to, amount);
+    if (result.error) return res.status(400).json({ error: result.error });
+    res.status(201).json(result.transfer);
+  } catch (error) {
+    res.status(400).json({ error: error.message });
+  }
 });
 
 module.exports = router;
