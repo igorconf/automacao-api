@@ -8,7 +8,7 @@ router.post('/', (req, res) => {
   try {
     const result = transferService.transfer(from, to, amount);
     if (result.error) return res.status(400).json({ error: result.error });
-    res.status(201).json(result.transfer);
+    res.status(201).json(result);
   } catch (error) {
     res.status(400).json({ error: error.message });
   }
