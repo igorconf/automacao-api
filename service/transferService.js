@@ -5,7 +5,7 @@ function transfer(from, to, amount) {
   if (!from || !to || typeof amount !== 'number') return { error: 'Dados obrigatórios' };
   const sender = users.find(u => u.username === from);
   const recipient = users.find(u => u.username === to);
-  if (!sender || !recipient) return { error: 'Usuário remetente ou destinatário não encontrado' };
+  if (!sender || !recipient) return { error: 'Usuário remetente, destinatário não encontrado' };
   if (!recipient.favorecido && amount >= 5000) {
     return { error: 'Transferência acima de R$ 5.000,00 só para favorecidos' };
   }
