@@ -1,0 +1,10 @@
+node_modules/
+.env
+*.log
+coverage/
+*.sqlite
+*.db
+dist/
+tmp/
+*.local
+/.vscode/
