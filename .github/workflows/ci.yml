@@ -24,3 +24,5 @@ jobs:
         run: sleep 5
       - name: Run tests
         run: npm test
+      - name: Run external tests
+        run: npm run test-external
