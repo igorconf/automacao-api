@@ -56,11 +56,18 @@ describe('Transfer Controller', () => {
                     amount: 100
                 });
 
-            expect(resposta.status).to.equal(201);  
-            expect(resposta.body).to.have.property("from", "julio");
-            expect(resposta.body).to.have.property("to", "priscila");
-            expect(resposta.body).to.have.property("amount", 100);
-            expect(resposta.body).to.have.property("date");
+            expect(resposta.status).to.equal(201); 
+            
+            const respostaEsperada = require('../fixture/respostas/quandoInformoValoresValidosEuTenhoSucessoRetorna201Created.json');
+            delete resposta.body.date;
+            delete respostaEsperada.date;
+
+            expect(resposta.body).to.deep.equal(respostaEsperada);
+
+            //expect(resposta.body).to.have.property("from", "julio");
+            //expect(resposta.body).to.have.property("to", "priscila");
+            //expect(resposta.body).to.have.property("amount", 100);
+            //expect(resposta.body).to.have.property("date");
 
             sinon.restore();
         });
