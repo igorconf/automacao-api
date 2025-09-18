@@ -22,7 +22,7 @@ jobs:
         run: nohup node server.js &
       - name: Wait for server
         run: sleep 5
-      - name: Run tests
-        run: npm test-controller
+      - name: Run controller tests
+        run: npm run test-controller
       - name: Run external tests
         run: npm run test-external
