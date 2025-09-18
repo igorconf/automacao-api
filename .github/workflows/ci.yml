@@ -18,5 +18,7 @@ jobs:
           node-version: '18'
       - name: Install dependencies
         run: npm install
+      - name: Start server
+        run: nohup node server.js
       - name: Run tests
         run: npm test
