@@ -66,6 +66,7 @@
     "/transfer": {
       "post": {
         "summary": "Transferir valores",
+        "security": [{ "bearerAuth": [] }],
         "requestBody": {
           "required": true,
           "content": {
@@ -84,8 +85,28 @@
         },
         "responses": {
           "201": { "description": "Transferência realizada" },
-          "400": { "description": "Regras de negócio violadas" }
+          "400": { "description": "Regras de negócio violadas" },
+          "401": { "description": "Token não fornecido" },
+          "403": { "description": "Token inválido" }
         }
+      },
+      "get": {
+        "summary": "Listar transferências",
+        "security": [{ "bearerAuth": [] }],
+        "responses": {
+          "200": { "description": "Lista de transferências" },
+          "401": { "description": "Token não fornecido" },
+          "403": { "description": "Token inválido" }
+        }
+      }
+    }
+  },
+  "components": {
+    "securitySchemes": {
+      "bearerAuth": {
+        "type": "http",
+        "scheme": "bearer",
+        "bearerFormat": "JWT"
       }
     }
   }

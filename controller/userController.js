@@ -10,11 +10,16 @@ router.post('/register', (req, res) => {
   res.status(201).json(result.user);
 });
 
+
+const jwt = require('jsonwebtoken');
+const SECRET = process.env.JWT_SECRET || 'sua_chave_secreta';
+
 router.post('/login', (req, res) => {
   const { username, password } = req.body;
   const result = userService.loginUser(username, password);
   if (result.error) return res.status(401).json({ error: result.error });
-  res.json(result.user);
+  const token = jwt.sign({ username: result.user.username }, SECRET, { expiresIn: '1h' });
+  res.json({ user: result.user, token });
 });
 
 router.get('/', (req, res) => {

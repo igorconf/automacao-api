@@ -14,4 +14,8 @@ function transfer(from, to, amount) {
   return { transfer: transferObj };
 }
 
-module.exports = { transfer };
+function getTransfers() {
+  return transfers;
+}
+
+module.exports = { transfer, getTransfers };

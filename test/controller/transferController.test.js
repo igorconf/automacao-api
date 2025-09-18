@@ -4,11 +4,32 @@ const { expect } = require('chai');
 const app = require('../../app');
 const transferService = require('../../service/transferService');
 
+let token;
+
+before(async () => {
+    await request(app)
+        .post('/users/register')
+        .send({
+            username: "julio",
+            password: "123456",
+            favorecido: true
+        });
+    
+    const respostaLogin = await request(app)
+        .post('/users/login')
+        .send({
+            username: "julio",
+            password: "123456"
+        });
+    token = respostaLogin.body.token;
+});
+
 describe('Transfer Controller', () => {
     describe('POST /transfer', () => {
         it('Quando informo remetente e destinatário inexistente recebo 400', async () => {
             const resposta = await request(app)
                 .post('/transfer')
+                .set('Authorization', `Bearer ${token}`)
                 .send({
                     from: "julio",
                     to: "priscila",
@@ -26,6 +47,7 @@ describe('Transfer Controller', () => {
 
             const resposta = await request(app)
                 .post('/transfer')
+                .set('Authorization', `Bearer ${token}`)
                 .send({
                     from: "julio",
                     to: "priscila",
@@ -50,6 +72,7 @@ describe('Transfer Controller', () => {
 
             const resposta = await request(app)
                 .post('/transfer')
+                .set('Authorization', `Bearer ${token}`)
                 .send({
                     from: "julio",
                     to: "priscila",
